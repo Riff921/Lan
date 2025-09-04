@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belajar Kabel LAN - Panduan Lengkap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 md:py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <div class="w-8 h-8 md:w-10 md:h-10 bg-white rounded-lg flex items-center justify-center">
+                        <span class="text-lg md:text-2xl">🔌</span>
+                    </div>
+                    <h1 class="text-lg md:text-2xl font-bold">Belajar Kabel LAN</h1>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="hover:text-blue-200 transition-colors">Beranda</a>
+                    <a href="#materi" class="hover:text-blue-200 transition-colors">Materi</a>
+                    <a href="#praktik" class="hover:text-blue-200 transition-colors">Praktik</a>
+                    <a href="#quiz" class="hover:text-blue-200 transition-colors">Kuis</a>
+                </nav>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white border-opacity-20">
+                <nav class="flex flex-col space-y-3 mt-4">
+                    <a href="#home" class="hover:text-blue-200 transition-colors py-2">Beranda</a>
+                    <a href="#materi" class="hover:text-blue-200 transition-colors py-2">Materi</a>
+                    <a href="#praktik" class="hover:text-blue-200 transition-colors py-2">Praktik</a>
+                    <a href="#quiz" class="hover:text-blue-200 transition-colors py-2">Kuis</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white py-12 md:py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">Pelajari Kabel LAN dengan Mudah</h2>
+            <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto px-4">Panduan lengkap untuk memahami, memasang, dan menguji kabel LAN dari dasar hingga mahir</p>
+            <button onclick="scrollToSection('materi')" class="bg-white text-blue-600 px-6 md:px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors text-sm md:text-base">
+                Mulai Belajar 🚀
+            </button>
+        </div>
+    </section>
+
+    <!-- Progress Tracker -->
+    <div class="bg-white shadow-sm border-b">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between text-sm text-gray-600">
+                <span>Progress Pembelajaran</span>
+                <span id="progress-text">0% Selesai</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                <div id="progress-bar" class="progress-bar bg-blue-600 h-2 rounded-full" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Materi Section -->
+        <section id="materi" class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">📚 Materi Pembelajaran</h2>
+            
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center mb-8 bg-white rounded-lg shadow-md p-1 md:p-2 gap-1 md:gap-0">
+                <button onclick="showTab('pengenalan')" class="tab-btn px-3 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-colors bg-blue-600 text-white text-sm md:text-base flex-1 md:flex-none min-w-0" data-tab="pengenalan">
+                    <span class="hidden sm:inline">Pengenalan</span>
+                    <span class="sm:hidden">Intro</span>
+                </button>
+                <button onclick="showTab('jenis')" class="tab-btn px-3 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-colors text-gray-600 hover:text-blue-600 text-sm md:text-base flex-1 md:flex-none min-w-0" data-tab="jenis">
+                    <span class="hidden sm:inline">Jenis Kabel</span>
+                    <span class="sm:hidden">Jenis</span>
+                </button>
+                <button onclick="showTab('wiring')" class="tab-btn px-3 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-colors text-gray-600 hover:text-blue-600 text-sm md:text-base flex-1 md:flex-none min-w-0" data-tab="wiring">
+                    <span class="hidden sm:inline">Wiring Standard</span>
+                    <span class="sm:hidden">Wiring</span>
+                </button>
+                <button onclick="showTab('tools')" class="tab-btn px-3 md:px-6 py-2 md:py-3 rounded-lg font-medium transition-colors text-gray-600 hover:text-blue-600 text-sm md:text-base flex-1 md:flex-none min-w-0" data-tab="tools">
+                    <span class="hidden sm:inline">Alat & Bahan</span>
+                    <span class="sm:hidden">Tools</span>
+                </button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+                <!-- Pengenalan Tab -->
+                <div id="pengenalan" class="tab-content active">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-600">🌐 Pengenalan Kabel LAN</h3>
+                    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                        <div>
+                            <h4 class="text-lg font-semibold mb-4">Apa itu Kabel LAN?</h4>
+                            <p class="text-gray-700 mb-4 text-sm md:text-base">
+                                Kabel LAN (Local Area Network) adalah kabel yang digunakan untuk menghubungkan perangkat dalam jaringan lokal. 
+                                Kabel ini memungkinkan transfer data antar komputer, router, switch, dan perangkat jaringan lainnya.
+                            </p>
+                            <div class="bg-blue-50 p-3 md:p-4 rounded-lg">
+                                <h5 class="font-semibold text-blue-800 mb-2 text-sm md:text-base">Fungsi Utama:</h5>
+                                <ul class="list-disc list-inside text-blue-700 space-y-1 text-sm md:text-base">
+                                    <li>Menghubungkan perangkat dalam jaringan</li>
+                                    <li>Mentransfer data dengan kecepatan tinggi</li>
+                                    <li>Menyediakan koneksi internet yang stabil</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center mt-4 md:mt-0">
+                            <div class="w-48 h-24 md:w-64 md:h-32 bg-gradient-to-r from-orange-400 to-orange-600 rounded-lg flex items-center justify-center">
+                                <span class="text-white text-3xl md:text-4xl">🔌</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jenis Kabel Tab -->
+                <div id="jenis" class="tab-content">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-600">📋 Jenis-Jenis Kabel LAN</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 md:p-6 rounded-lg border border-green-200">
+                            <h4 class="text-base md:text-lg font-semibold mb-2 md:mb-3 text-green-800">Cat 5e</h4>
+                            <p class="text-xs md:text-sm text-green-700 mb-2 md:mb-3">Kecepatan hingga 1 Gbps, jarak maksimal 100m</p>
+                            <div class="text-xs text-green-600 space-y-1">
+                                <p>✓ Cocok untuk jaringan rumah</p>
+                                <p>✓ Harga terjangkau</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 md:p-6 rounded-lg border border-blue-200">
+                            <h4 class="text-base md:text-lg font-semibold mb-2 md:mb-3 text-blue-800">Cat 6</h4>
+                            <p class="text-xs md:text-sm text-blue-700 mb-2 md:mb-3">Kecepatan hingga 10 Gbps, jarak 55m</p>
+                            <div class="text-xs text-blue-600 space-y-1">
+                                <p>✓ Performa lebih baik</p>
+                                <p>✓ Cocok untuk kantor</p>
+                            </div>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 md:p-6 rounded-lg border border-purple-200 sm:col-span-2 lg:col-span-1">
+                            <h4 class="text-base md:text-lg font-semibold mb-2 md:mb-3 text-purple-800">Cat 6a</h4>
+                            <p class="text-xs md:text-sm text-purple-700 mb-2 md:mb-3">Kecepatan 10 Gbps, jarak 100m</p>
+                            <div class="text-xs text-purple-600 space-y-1">
+                                <p>✓ Kualitas premium</p>
+                                <p>✓ Untuk server room</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wiring Standard Tab -->
+                <div id="wiring" class="tab-content">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-600">🔧 Standard Wiring</h3>
+                    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="bg-orange-50 p-4 md:p-6 rounded-lg border border-orange-200">
+                            <h4 class="text-base md:text-lg font-semibold mb-3 md:mb-4 text-orange-800">T568A Standard</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">1. Putih Hijau</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-green-700 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">2. Hijau</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-orange-300 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">3. Putih Orange</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-blue-600 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">4. Biru</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-blue-300 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">5. Putih Biru</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-orange-600 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">6. Orange</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-yellow-600 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">7. Putih Coklat</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-yellow-800 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">8. Coklat</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-4 md:p-6 rounded-lg border border-blue-200">
+                            <h4 class="text-base md:text-lg font-semibold mb-3 md:mb-4 text-blue-800">T568B Standard</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-orange-300 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">1. Putih Orange</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-orange-600 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">2. Orange</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">3. Putih Hijau</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-blue-600 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">4. Biru</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-blue-300 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">5. Putih Biru</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-green-700 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">6. Hijau</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-yellow-600 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">7. Putih Coklat</span>
+                                </div>
+                                <div class="flex items-center space-x-2 md:space-x-3">
+                                    <div class="w-3 h-3 md:w-4 md:h-4 bg-yellow-800 rounded flex-shrink-0"></div>
+                                    <span class="text-xs md:text-sm">8. Coklat</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <p class="text-yellow-800 text-sm">
+                            <strong>💡 Tips:</strong> T568B lebih umum digunakan di Indonesia. Pastikan kedua ujung kabel menggunakan standard yang sama untuk koneksi straight-through.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tools Tab -->
+                <div id="tools" class="tab-content">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-600">🛠️ Alat dan Bahan</h3>
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                        <div class="card-hover bg-white p-4 md:p-6 rounded-lg border shadow-sm">
+                            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- Crimping Tool -->
+                                    <defs>
+                                        <linearGradient id="crimpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#4a5568"/>
+                                            <stop offset="100%" style="stop-color:#2d3748"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Handle 1 -->
+                                    <rect x="10" y="20" width="35" height="8" rx="4" fill="url(#crimpGrad)"/>
+                                    <!-- Handle 2 -->
+                                    <rect x="10" y="72" width="35" height="8" rx="4" fill="url(#crimpGrad)"/>
+                                    <!-- Pivot -->
+                                    <circle cx="50" cy="50" r="6" fill="#718096"/>
+                                    <!-- Jaw 1 -->
+                                    <path d="M50 44 L85 35 L90 40 L55 49 Z" fill="url(#crimpGrad)"/>
+                                    <!-- Jaw 2 -->
+                                    <path d="M50 56 L85 65 L90 60 L55 51 Z" fill="url(#crimpGrad)"/>
+                                    <!-- Crimping dies -->
+                                    <rect x="82" y="38" width="6" height="4" fill="#e53e3e"/>
+                                    <rect x="82" y="58" width="6" height="4" fill="#e53e3e"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Crimping Tool</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Untuk memasang konektor RJ45 pada kabel</p>
+                        </div>
+                        <div class="card-hover bg-white p-4 md:p-6 rounded-lg border shadow-sm">
+                            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- RJ45 Connector -->
+                                    <defs>
+                                        <linearGradient id="rj45Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#f7fafc"/>
+                                            <stop offset="100%" style="stop-color:#e2e8f0"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Main body -->
+                                    <rect x="25" y="30" width="50" height="40" rx="3" fill="url(#rj45Grad)" stroke="#cbd5e0" stroke-width="1"/>
+                                    <!-- Tab -->
+                                    <rect x="40" y="25" width="20" height="8" rx="2" fill="#a0aec0"/>
+                                    <!-- Pins -->
+                                    <rect x="30" y="60" width="2" height="8" fill="#ffd700"/>
+                                    <rect x="35" y="60" width="2" height="8" fill="#ff8c00"/>
+                                    <rect x="40" y="60" width="2" height="8" fill="#32cd32"/>
+                                    <rect x="45" y="60" width="2" height="8" fill="#1e90ff"/>
+                                    <rect x="50" y="60" width="2" height="8" fill="#87ceeb"/>
+                                    <rect x="55" y="60" width="2" height="8" fill="#228b22"/>
+                                    <rect x="60" y="60" width="2" height="8" fill="#daa520"/>
+                                    <rect x="65" y="60" width="2" height="8" fill="#8b4513"/>
+                                    <!-- Cable entry -->
+                                    <rect x="35" y="70" width="30" height="6" rx="3" fill="#2d3748"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Konektor RJ45</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Konektor untuk ujung kabel LAN</p>
+                        </div>
+                        <div class="card-hover bg-white p-4 md:p-6 rounded-lg border shadow-sm">
+                            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- Cable Tester -->
+                                    <defs>
+                                        <linearGradient id="testerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#2b6cb0"/>
+                                            <stop offset="100%" style="stop-color:#1e40af"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Main unit -->
+                                    <rect x="20" y="25" width="60" height="35" rx="5" fill="url(#testerGrad)"/>
+                                    <!-- Screen -->
+                                    <rect x="25" y="30" width="25" height="15" rx="2" fill="#000" stroke="#4a5568"/>
+                                    <!-- LED indicators -->
+                                    <circle cx="60" cy="35" r="3" fill="#10b981"/>
+                                    <circle cx="70" cy="35" r="3" fill="#f59e0b"/>
+                                    <circle cx="60" cy="45" r="3" fill="#ef4444"/>
+                                    <circle cx="70" cy="45" r="3" fill="#3b82f6"/>
+                                    <!-- Ports -->
+                                    <rect x="25" y="65" width="15" height="8" rx="2" fill="#374151"/>
+                                    <rect x="60" y="65" width="15" height="8" rx="2" fill="#374151"/>
+                                    <!-- Labels -->
+                                    <text x="32" y="80" font-family="Arial" font-size="6" fill="#6b7280">MAIN</text>
+                                    <text x="65" y="80" font-family="Arial" font-size="6" fill="#6b7280">REMOTE</text>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Cable Tester</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Untuk menguji koneksi kabel</p>
+                        </div>
+                        <div class="card-hover bg-white p-4 md:p-6 rounded-lg border shadow-sm">
+                            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- Cable Stripper -->
+                                    <defs>
+                                        <linearGradient id="stripperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#dc2626"/>
+                                            <stop offset="100%" style="stop-color:#991b1b"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Handle -->
+                                    <ellipse cx="30" cy="50" rx="8" ry="25" fill="url(#stripperGrad)"/>
+                                    <!-- Blade housing -->
+                                    <rect x="38" y="40" width="35" height="20" rx="3" fill="#4a5568"/>
+                                    <!-- Cutting blade -->
+                                    <path d="M70 45 L85 48 L85 52 L70 55 Z" fill="#e5e7eb"/>
+                                    <!-- Adjustment screw -->
+                                    <circle cx="55" cy="35" r="3" fill="#6b7280"/>
+                                    <!-- Wire guides -->
+                                    <rect x="75" y="47" width="8" height="6" rx="3" fill="#374151"/>
+                                    <!-- Scale markings -->
+                                    <line x1="45" y1="62" x2="65" y2="62" stroke="#9ca3af" stroke-width="1"/>
+                                    <line x1="50" y1="60" x2="50" y2="64" stroke="#9ca3af" stroke-width="1"/>
+                                    <line x1="60" y1="60" x2="60" y2="64" stroke="#9ca3af" stroke-width="1"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Cable Stripper</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Untuk mengupas lapisan luar kabel</p>
+                        </div>
+                        <div class="card-hover bg-white p-4 md:p-6 rounded-lg border shadow-sm">
+                            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- UTP Cable -->
+                                    <defs>
+                                        <linearGradient id="cableGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#4b5563"/>
+                                            <stop offset="100%" style="stop-color:#6b7280"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Cable coil -->
+                                    <ellipse cx="50" cy="30" rx="25" ry="8" fill="none" stroke="url(#cableGrad)" stroke-width="4"/>
+                                    <ellipse cx="50" cy="40" rx="25" ry="8" fill="none" stroke="url(#cableGrad)" stroke-width="4"/>
+                                    <ellipse cx="50" cy="50" rx="25" ry="8" fill="none" stroke="url(#cableGrad)" stroke-width="4"/>
+                                    <ellipse cx="50" cy="60" rx="25" ry="8" fill="none" stroke="url(#cableGrad)" stroke-width="4"/>
+                                    <!-- Cable end -->
+                                    <rect x="75" y="58" width="15" height="4" rx="2" fill="#4b5563"/>
+                                    <!-- Inner wires visible -->
+                                    <rect x="88" y="59" width="2" height="2" fill="#10b981"/>
+                                    <rect x="88" y="61" width="2" height="2" fill="#f59e0b"/>
+                                    <rect x="90" y="59" width="2" height="2" fill="#3b82f6"/>
+                                    <rect x="90" y="61" width="2" height="2" fill="#ef4444"/>
+                                    <!-- Label -->
+                                    <rect x="35" y="70" width="30" height="8" rx="2" fill="#fbbf24"/>
+                                    <text x="50" y="76" font-family="Arial" font-size="6" text-anchor="middle" fill="#000">CAT6</text>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Kabel UTP</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Kabel jaringan sesuai kebutuhan</p>
+                        </div>
+                        <div class="card-hover bg-white p-4 md:p-6 rounded-lg border shadow-sm">
+                            <div class="w-16 h-16 md:w-20 md:h-20 mb-3 md:mb-4 mx-auto">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- Boot RJ45 -->
+                                    <defs>
+                                        <linearGradient id="bootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#1f2937"/>
+                                            <stop offset="100%" style="stop-color:#374151"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Boot body -->
+                                    <path d="M30 35 Q25 35 25 40 L25 60 Q25 65 30 65 L70 65 Q75 65 75 60 L75 40 Q75 35 70 35 Z" fill="url(#bootGrad)"/>
+                                    <!-- Strain relief ridges -->
+                                    <line x1="30" y1="40" x2="70" y2="40" stroke="#4b5563" stroke-width="1"/>
+                                    <line x1="30" y1="45" x2="70" y2="45" stroke="#4b5563" stroke-width="1"/>
+                                    <line x1="30" y1="50" x2="70" y2="50" stroke="#4b5563" stroke-width="1"/>
+                                    <line x1="30" y1="55" x2="70" y2="55" stroke="#4b5563" stroke-width="1"/>
+                                    <line x1="30" y1="60" x2="70" y2="60" stroke="#4b5563" stroke-width="1"/>
+                                    <!-- RJ45 connector inside -->
+                                    <rect x="35" y="42" width="30" height="16" rx="2" fill="#e5e7eb" opacity="0.7"/>
+                                    <!-- Cable entry -->
+                                    <ellipse cx="50" cy="70" rx="8" ry="3" fill="#2d3748"/>
+                                    <!-- Highlight -->
+                                    <ellipse cx="45" cy="38" rx="8" ry="2" fill="#6b7280" opacity="0.5"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Boot RJ45</h4>
+                            <p class="text-xs md:text-sm text-gray-600">Pelindung konektor (opsional)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Praktik Section -->
+        <section id="praktik" class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800">🔨 Panduan Praktik</h2>
+            <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+                <h3 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-600">Langkah-langkah Crimping Kabel</h3>
+                <div class="space-y-4 md:space-y-6">
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-blue-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Siapkan Kabel dan Alat</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Potong kabel UTP sesuai panjang yang dibutuhkan. Siapkan crimping tool, konektor RJ45, dan cable stripper.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-blue-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Kupas Lapisan Luar</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Kupas lapisan luar kabel sekitar 2-3 cm dari ujung. Hati-hati jangan sampai merusak kabel di dalamnya.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-blue-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Susun Kabel Sesuai Standard</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Susun 8 kabel kecil sesuai urutan T568A atau T568B. Pastikan urutan benar dan kabel lurus.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-blue-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">4</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Potong Ujung Kabel</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Potong ujung kabel agar rata dan panjangnya sekitar 1.5 cm dari lapisan luar.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-blue-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">5</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Masukkan ke Konektor RJ45</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Masukkan kabel ke konektor RJ45 dengan hati-hati. Pastikan semua kabel masuk hingga ujung konektor.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-blue-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">6</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Crimping</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Gunakan crimping tool untuk menekan konektor. Tekan dengan kuat hingga terdengar bunyi 'klik'.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3 md:space-x-4 p-3 md:p-4 bg-gray-50 rounded-lg">
+                        <div class="bg-green-600 text-white rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center font-bold text-xs md:text-sm flex-shrink-0">7</div>
+                        <div>
+                            <h4 class="font-semibold mb-2 text-sm md:text-base">Test Kabel</h4>
+                            <p class="text-gray-700 text-xs md:text-sm">Gunakan cable tester untuk memastikan semua pin terhubung dengan benar. Ulangi untuk ujung satunya.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="mb-16">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12 text-gray-800">🧠 Kuis Pemahaman</h2>
+            <div class="bg-white rounded-lg shadow-lg p-4 md:p-8">
+                <div id="quiz-container">
+                    <div class="mb-4 md:mb-6">
+                        <h3 class="text-lg md:text-xl font-semibold mb-3 md:mb-4">Pertanyaan <span id="question-number">1</span> dari 5</h3>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div id="quiz-progress" class="bg-green-600 h-2 rounded-full transition-all duration-300" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-container">
+                        <h4 id="question-text" class="text-base md:text-lg mb-4 md:mb-6">Berapa kecepatan maksimal kabel Cat 5e?</h4>
+                        <div id="options-container" class="space-y-2 md:space-y-3">
+                            <button class="option-btn w-full text-left p-3 md:p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm md:text-base" onclick="selectOption(this, 'A')">
+                                A. 100 Mbps
+                            </button>
+                            <button class="option-btn w-full text-left p-3 md:p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm md:text-base" onclick="selectOption(this, 'B')">
+                                B. 1 Gbps
+                            </button>
+                            <button class="option-btn w-full text-left p-3 md:p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm md:text-base" onclick="selectOption(this, 'C')">
+                                C. 10 Gbps
+                            </button>
+                            <button class="option-btn w-full text-left p-3 md:p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors text-sm md:text-base" onclick="selectOption(this, 'D')">
+                                D. 100 Gbps
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 md:mt-8 flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
+                        <button id="prev-btn" onclick="previousQuestion()" class="px-4 md:px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors text-sm md:text-base order-2 sm:order-1" disabled>
+                            ← Sebelumnya
+                        </button>
+                        <button id="next-btn" onclick="nextQuestion()" class="px-4 md:px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm md:text-base order-1 sm:order-2" disabled>
+                            Selanjutnya →
+                        </button>
+                    </div>
+                </div>
+
+                <div id="quiz-result" class="hidden text-center">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h3 class="text-2xl font-bold mb-4">Kuis Selesai!</h3>
+                    <p class="text-lg mb-6">Skor Anda: <span id="final-score" class="font-bold text-blue-600">0</span>/5</p>
+                    <button onclick="restartQuiz()" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Ulangi Kuis
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <span class="text-2xl">🔌</span>
+                <h3 class="text-xl font-bold">Belajar Kabel LAN</h3>
+            </div>
+            <p class="text-gray-400 mb-4">Platform pembelajaran kabel LAN yang mudah dan menyenangkan</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="#" class="hover:text-blue-400 transition-colors">Tentang</a>
+                <a href="#" class="hover:text-blue-400 transition-colors">Kontak</a>
+                <a href="#" class="hover:text-blue-400 transition-colors">Bantuan</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tab buttons
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:text-blue-600');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab button
+            const activeBtn = document.querySelector(`[data-tab="${tabName}"]`);
+            activeBtn.classList.add('bg-blue-600', 'text-white');
+            activeBtn.classList.remove('text-gray-600', 'hover:text-blue-600');
+            
+            updateProgress();
+        }
+
+        // Smooth scroll function
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Quiz functionality
+        const quizData = [
+            {
+                question: "Berapa kecepatan maksimal kabel Cat 5e?",
+                options: ["100 Mbps", "1 Gbps", "10 Gbps", "100 Gbps"],
+                correct: 1
+            },
+            {
+                question: "Berapa jumlah kabel kecil dalam kabel UTP?",
+                options: ["6", "8", "10", "12"],
+                correct: 1
+            },
+            {
+                question: "Apa kepanjangan dari RJ45?",
+                options: ["Registered Jack 45", "Router Junction 45", "Relay Jack 45", "Remote Jack 45"],
+                correct: 0
+            },
+            {
+                question: "Berapa jarak maksimal kabel Cat 6 untuk kecepatan 10 Gbps?",
+                options: ["100m", "75m", "55m", "25m"],
+                correct: 2
+            },
+            {
+                question: "Standard wiring mana yang lebih umum digunakan di Indonesia?",
+                options: ["T568A", "T568B", "T568C", "T568D"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let selectedAnswers = [];
+        let score = 0;
+
+        function selectOption(button, option) {
+            // Remove selection from all options
+            const options = document.querySelectorAll('.option-btn');
+            options.forEach(opt => {
+                opt.classList.remove('border-blue-500', 'bg-blue-100');
+                opt.classList.add('border-gray-300');
+            });
+            
+            // Add selection to clicked option
+            button.classList.add('border-blue-500', 'bg-blue-100');
+            button.classList.remove('border-gray-300');
+            
+            // Store selected answer
+            const optionIndex = option.charCodeAt(0) - 65; // Convert A,B,C,D to 0,1,2,3
+            selectedAnswers[currentQuestion] = optionIndex;
+            
+            // Enable next button
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        }
+
+        function displayQuestion() {
+            const question = quizData[currentQuestion];
+            
+            document.getElementById('question-number').textContent = currentQuestion + 1;
+            document.getElementById('question-text').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const letter = String.fromCharCode(65 + index); // Convert 0,1,2,3 to A,B,C,D
+                const button = document.createElement('button');
+                button.className = 'option-btn w-full text-left p-4 border border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors';
+                button.textContent = `${letter}. ${option}`;
+                button.onclick = () => selectOption(button, letter);
+                
+                // Restore selection if answer was previously selected
+                if (selectedAnswers[currentQuestion] === index) {
+                    button.classList.add('border-blue-500', 'bg-blue-100');
+                    button.classList.remove('border-gray-300');
+                }
+                
+                optionsContainer.appendChild(button);
+            });
+            
+            // Update progress bar
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            
+            // Update button states
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').disabled = selectedAnswers[currentQuestion] === undefined;
+            
+            if (currentQuestion === quizData.length - 1) {
+                document.getElementById('next-btn').textContent = 'Selesai';
+            } else {
+                document.getElementById('next-btn').textContent = 'Selanjutnya →';
+            }
+        }
+
+        function finishQuiz() {
+            // Calculate score
+            score = 0;
+            selectedAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correct) {
+                    score++;
+                }
+            });
+            
+            // Hide quiz container and show result
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('final-score').textContent = score;
+            
+            updateProgress();
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            selectedAnswers = [];
+            score = 0;
+            
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            
+            displayQuestion();
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            const sections = ['pengenalan', 'jenis', 'wiring', 'tools'];
+            const completedSections = sections.filter(section => 
+                document.getElementById(section).classList.contains('active')
+            ).length;
+            
+            let progress = (completedSections / sections.length) * 80; // 80% for completing all tabs
+            
+            // Add 20% if quiz is completed
+            if (!document.getElementById('quiz-result').classList.contains('hidden')) {
+                progress += 20;
+            }
+            
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = Math.round(progress) + '% Selesai';
+        }
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Initialize
+        displayQuestion();
+        updateProgress();
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97997a5324ef4068',t:'MTc1Njk0Njg3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
